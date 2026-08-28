@@ -234,7 +234,7 @@
                         <b class="lastTopicDateSmallText">Juni</b>
                     </div>
 
-                    <h1 class="lastTopicTopic">Römer 12,13-34</h1>
+                    <h1 class="lastTopicTopic">RÃ¶mer 12,13-34</h1>
                 </div>
             </section>
 
@@ -245,7 +245,7 @@
                         <p class="grayText">Wenn du brerits ein Konto angelegt hast, kannst du dich hier <a onclick="showPage('login')">anmelden</a>.</p>
                         <p>&nbsp;</p>
 
-                        <label for="register_first_name" class="bold">Persönliche Daten:</label>
+                        <label for="register_first_name" class="bold">PersÃ¶nliche Daten:</label>
                         <input type="text" id="register_first_name" name="register_first_name" required placeholder="Vorname" />
                         <input type="text" id="register_last_name" name="register_last_name" required placeholder="Nachname" />
                         <input type="text" id="register_username" name="register_username" required placeholder="Benutzername" />
@@ -276,7 +276,7 @@
                         <input type="email" id="login_mail" name="login_mail" required placeholder="example@service.com" />
 
                         <label for="login_pass" class="bold">Passwort:</label>
-                        <input type="password" id="login_pass" name="login_pass" required placeholder="••••••••" />
+                        <input type="password" id="login_pass" name="login_pass" required placeholder="Â•Â•Â•Â•Â•Â•Â•Â•" />
 
                         <p>&nbsp;</p>
                         <button class="grayButton" onclick="showPage('register')">Zum Registrieren</button>
@@ -424,10 +424,10 @@
                     }
                     else {
                         if (profile.access_level < 1) {
-                            showMessageBox('Kein Zugriff', 'Du hast keine Berechtigung auf die Jugendthemen zuzugreifen oder sie zu ändern. Versuche es mit einem anderen Konto. Wenn du glaubst, dass du berechtigt sein solltest, wende dich an einen Administrator.\n\nFehlercode: NAWL' + profile.access_level);
+                            showMessageBox('Kein Zugriff', 'Du hast keine Berechtigung auf die Jugendthemen zuzugreifen oder sie zu Ã¤ndern. Versuche es mit einem anderen Konto. Wenn du glaubst, dass du berechtigt sein solltest, wende dich an einen Administrator.\n\nFehlercode: NAWL' + profile.access_level);
                         }
                         else {
-                            showMessageBox('Eingeschränkter Zugriff', 'Du hast keine Berechtigung die Jugendthemen zu ändern, du kannst sie jedoch auf der Website anshen. Versuche es mit einem anderen Konto. Wenn du glaubst, dass du berechtigt sein solltest, wende dich an einen Administrator.\n\nFehlercode: NAWL' + profile.access_level);
+                            showMessageBox('EingeschrÃ¤nkter Zugriff', 'Du hast keine Berechtigung die Jugendthemen zu Ã¤ndern, du kannst sie jedoch auf der Website anshen. Versuche es mit einem anderen Konto. Wenn du glaubst, dass du berechtigt sein solltest, wende dich an einen Administrator.\n\nFehlercode: NAWL' + profile.access_level);
                         }
                     }
                 } else {
