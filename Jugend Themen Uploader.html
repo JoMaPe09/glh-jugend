@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>GLH-Jugend Themen Uploader</title>
+    
+        <style>
+            body {
+                background-color: rgb(12, 12, 12);
+                color: white;
+                font-family: 'Segoe UI';
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .page {
+                display: none;
+            }
+    
+            .page.active {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                background-color: rgb(42, 42, 42);
+                width: 100%;
+                padding: 10px 20px 10px 20px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+    
+            nav a {
+                margin-right: 15px;
+                padding-right: 25px;
+                text-decoration: none;
+                font-weight: normal;
+                padding-bottom: 5px;
+                color: rgb(150, 150, 150);
+                transition: 0.25s;
+            }
+
+                nav a:hover {
+                    color: white;
+                }
+    
+            h2 {
+                font-weight: 600;
+            }
+
+            a {
+                color: #5ec4ff;
+                cursor: pointer;
+            }
+
+                a:hover {
+                    text-decoration: underline;
+                }
+
+            label {
+                display: block;
+                margin-top: 10px;
+            }
+
+            input {
+                background-color: rgb(30, 30, 30);
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 10px;
+                margin-top: 10px;
+                color: rgb(200, 200, 200);
+                cursor: text;
+                display: inline-block;
+                width: stretch;
+                transition-duration: 0.25s;
+            }
+
+                input:focus {
+                    color: white;
+                    border-color: rgba(255, 255, 255, 0.25);
+                    background-color: rgb(40, 40, 40);
+                    border-width: 2px;
+                }
+
+                input:hover {
+                    border-color: rgba(255, 255, 255, 0.25);
+                    background-color: rgb(40, 40, 40);
+                }
+
+            button {
+                background-color: rgb(24, 36, 24);
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 10px 32px;
+                margin-top: 10px;
+                text-align: center;
+                color: rgb(200, 200, 200);
+                font-weight: bold;
+                cursor: pointer;
+                display: inline-block;
+                width: stretch;
+                transition-duration: 0.25s;
+            }
+
+                button:hover {
+                    color: white;
+                    border-color: rgba(255, 255, 255, 0.25);
+                }
+
+            .grayButton {
+                background-color: rgb(30, 30, 30);
+                border: 2px solid rgba(255, 255, 255, 0.1);
+            }
+
+                .grayButton:hover {
+                    color: white;
+                    border-color: rgba(255, 255, 255, 0.25);
+                    background-color: rgb(40, 40, 40);
+                }
+
+            .redButton {
+                background-color: rgb(77, 31, 29);
+                border: 2px solid rgba(255, 255, 255, 0.1);
+            }
+
+                .redButton:hover {
+                    color: white;
+                    border-color: rgba(100, 100, 100, 0.4);
+                    background-color: rgb(107, 43, 41);
+                }
+
+            .bold {
+                font-weight: bold;
+            }
+
+            .grayText {
+                color: rgb(200, 200, 200);
+            }
+
+            .content {
+                margin-top: 40px;
+                padding: 20px;
+            }
+
+            .centerContent {
+                position: fixed;
+                width: 100%;
+                height: 95%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .centerPanel {
+                width: 350px;
+                background-color: rgb(25, 25, 25);
+                padding: 0px 30px 30px 30px;
+                border: 2px solid rgb(30, 30, 30);
+                border-radius: 30px;
+            }
+
+            .lastTopicPanel {
+                background-color: rgb(22, 22, 22);
+                width: stretch;
+                height: 190px;
+                border: 2px solid rgb(42, 42, 42);
+                border-radius: 27px;
+                padding: 15px 15px 0 15px;
+                display: flex;
+            }
+
+            .lastTopicDatePanel {
+                background-color: rgb(50, 50, 50);
+                width: 170px;
+                height: 170px;
+                border: 2px solid rgb(70, 70, 70);
+                border-radius: 12px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .lastTopicDateBigText {
+                font-size: 80px;
+                font-family: Broadway;
+                color: #b0ffc0;
+            }
+
+            .lastTopicDateSmallText {
+                font-size: 25px;
+                font-family: 'Times New Roman', Times, serif;
+                font-weight: 500;
+                color: #89b7c7;
+            }
+
+            .lastTopicTopic {
+                margin-left: 20px;
+                margin-top: 0px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <nav>
+            <h2>GLH-Jugend Themen Uploader</h2>
+            <a id="loginLogofButton" onclick="logonLogofButtonAction()">Anmelden</a>
+        </nav>
+
+        <div class="content">
+            <section id="pleaseLogin" class="page">
+                <div class="centerContent">
+                    <div class="centerPanel">
+                        <h1 class="bold">Bitte anmelden</h1>
+                        <p class="grayText">Du musst dich anmelden, um die Jugendthemen hochzuladen oder zu bearbeiten.</p>
+                        <p>&nbsp;</p>
+                        <button onclick="showPage('login')">Zur Anmeldung</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="home" class="page">
+                <h2>
+                    Letztes Thema:
+                </h2>
+
+                <div class="lastTopicPanel">
+                    <div class="lastTopicDatePanel">
+                        <b class="lastTopicDateBigText">12.</b>
+                        <b class="lastTopicDateSmallText">Juni</b>
+                    </div>
+
+                    <h1 class="lastTopicTopic">Römer 12,13-34</h1>
+                </div>
+            </section>
+
+            <section id="register" class="page">
+                <div class="centerContent">
+                    <div class="centerPanel">
+                        <h1 class="bold">Registrieren</h1>
+                        <p class="grayText">Wenn du brerits ein Konto angelegt hast, kannst du dich hier <a onclick="showPage('login')">anmelden</a>.</p>
+                        <p>&nbsp;</p>
+
+                        <label for="register_first_name" class="bold">Persönliche Daten:</label>
+                        <input type="text" id="register_first_name" name="register_first_name" required placeholder="Vorname" />
+                        <input type="text" id="register_last_name" name="register_last_name" required placeholder="Nachname" />
+                        <input type="text" id="register_username" name="register_username" required placeholder="Benutzername" />
+
+                        <label for="register_mail" class="bold">E-Mail Adresse:</label>
+                        <input type="email" id="register_mail" name="register_mail" required placeholder="example@service.com" />
+
+                        <label for="register_pass" class="bold">Passwort:</label>
+                        <input type="password" id="register_pass" name="register_pass" required placeholder="Mindestens 8 Zeichen" />
+                        <input type="password" id="register_pass_repeat" name="register_pass_repeat" required placeholder="Passwort wiederholen" />
+
+
+                        <p>&nbsp;</p>
+                        <button class="grayButton" onclick="showPage('login')">Zur Anmeldung</button>
+                        <button onclick="signUp()">Registrieren</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="login" class="page">
+                <div class="centerContent">
+                    <div class="centerPanel">
+                        <h1 class="bold">Anmelden</h1>
+                        <p class="grayText">Wenn du noch kein Konto angelegt hast, kannst du dich hier <a onclick="showPage('register')">registrieren</a>.</p>
+                        <p>&nbsp;</p>
+
+                        <label for="login_mail" class="bold">E-Mail Adresse:</label>
+                        <input type="email" id="login_mail" name="login_mail" required placeholder="example@service.com" />
+
+                        <label for="login_pass" class="bold">Passwort:</label>
+                        <input type="password" id="login_pass" name="login_pass" required placeholder="••••••••" />
+
+                        <p>&nbsp;</p>
+                        <button class="grayButton" onclick="showPage('register')">Zum Registrieren</button>
+                        <button onclick="signIn()">Anmelden</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="messageBox" class="page">
+                <div class="centerContent">
+                    <div class="centerPanel">
+                        <h1 class="bold" id="txtMsgBoxTitle">Title</h1>
+                        <p class="grayText" id="txtMsgBoxText">DescriptionTExt123.</p>
+                        <button onclick="signOut()" class="redButton">Abmelden und Konto wechseln</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+        <script>
+            const supabaseUrl = "https://kxepmrvwowuntsfadrck.supabase.co";
+            const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt4ZXBtcnZ3b3d1bnRzZmFkcmNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NDY1NTYsImV4cCI6MjA5NzAyMjU1Nn0.dV5VDznvOzooG7qZnGoce2OvdQ4_HE8o8ij6Kh0YJSk";
+
+            const sb = window.supabase.createClient(
+                supabaseUrl,
+                supabaseKey
+            );
+
+            async function signUp() {
+                const email = document.getElementById("register_mail").value;
+                const password = document.getElementById("register_pass").value;
+                const firstname = document.getElementById("register_first_name").value;
+                const lastname = document.getElementById("register_last_name").value;
+                const username = document.getElementById("register_username").value;
+
+                const { data, error } = await sb.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: {
+                            firstname: firstname,
+                            lastname: lastname,
+                            username: username
+                        }
+                    }
+                });
+
+                if (error) {
+                    console.log(error.message);
+                    return;
+                }
+
+                console.log("Registriert:", data);
+            }
+
+            async function signIn() {
+                const email = document.getElementById("login_mail").value;
+                const password = document.getElementById("login_pass").value;
+
+                const { data, error } = await sb.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (error) {
+                    return;
+                }
+
+                showPage('home');
+                document.getElementById("loginLogofButton").innerText = "Abmelden (" + data.session.user.user_metadata.username + ")";
+            }
+
+            async function signOut() {
+                await sb.auth.signOut();
+                document.getElementById("loginLogofButton").innerText = "Anmelden";
+            }
+
+            sb.auth.getSession().then(({ data }) => {
+                if (data.session) {
+                    
+                }
+            });
+        </script>
+
+        <script>
+            var loggedIn = Boolean(false);
+
+            function showPage(pageId) {
+                var seiten = document.querySelectorAll('.page');
+                seiten.forEach(function (seite) {
+                    seite.classList.remove('active');
+                });
+
+                document.getElementById(pageId).classList.add('active');
+            }
+
+            function showMessageBox(title, description) {
+                document.getElementById("txtMsgBoxTitle").innerText = title;
+                document.getElementById("txtMsgBoxText").innerText = description;
+
+                var seiten = document.querySelectorAll('.page');
+                seiten.forEach(function (seite) {
+                    seite.classList.remove('active');
+                });
+
+                document.getElementById('messageBox').classList.add('active');
+            }
+
+            async function logonLogofButtonAction() {
+                if (loggedIn == Boolean(true)) {
+                    await signOut();
+                    showPage('pleaseLogin');
+                    loggedIn = Boolean(false);
+                }
+                else {
+                    showPage('login');
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", async () => {
+
+                const { data, error } = await sb.auth.getSession();
+                const user = data?.session?.user;
+
+                if (error) {
+                    console.error(error.message);
+                    return;
+                }
+
+                if (data && data.session && data.session.user) {
+                    console.log("Bereits eingeloggt:", data.session.user.email);
+                    document.getElementById("loginLogofButton").innerText = "Abmelden (" + data.session.user.user_metadata.username + ")";
+                    loggedIn = Boolean(true);
+                    
+                    const { data: profile } = await sb
+                        .from("profiles")
+                        .select("*")
+                        .eq("id", user.id)
+                        .single();
+
+                    if (profile.access_level > 1) {
+                        showPage('home');
+                    }
+                    else {
+                        if (profile.access_level < 1) {
+                            showMessageBox('Kein Zugriff', 'Du hast keine Berechtigung auf die Jugendthemen zuzugreifen oder sie zu ändern. Versuche es mit einem anderen Konto. Wenn du glaubst, dass du berechtigt sein solltest, wende dich an einen Administrator.\n\nFehlercode: NAWL' + profile.access_level);
+                        }
+                        else {
+                            showMessageBox('Eingeschränkter Zugriff', 'Du hast keine Berechtigung die Jugendthemen zu ändern, du kannst sie jedoch auf der Website anshen. Versuche es mit einem anderen Konto. Wenn du glaubst, dass du berechtigt sein solltest, wende dich an einen Administrator.\n\nFehlercode: NAWL' + profile.access_level);
+                        }
+                    }
+                } else {
+                    console.log("Nicht eingeloggt");
+                    showPage('pleaseLogin');
+                    document.getElementById("loginLogofButton").innerText = "Anmelden";
+                    loggedIn = Boolean(false);
+                }
+            });
+        </script>
+    </body>
+</html>
